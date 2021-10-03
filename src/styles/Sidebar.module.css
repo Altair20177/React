@@ -1,0 +1,26 @@
+.nav{
+    grid-area: n;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+  }
+  .nav a{
+    color: rgb(138, 189, 255);
+    text-decoration: none;
+    font-size: 24px;
+    margin-bottom: 8px;
+    margin-left: 27px;
+    width: 70%;
+    padding-left: 5px;
+  }
+  .nav a:hover{
+    background-color: rgba(199, 199, 199, 0.5);
+    border-radius: 5px;
+  }
+  .nav a:last-child{
+    margin-top: 30px;
+  }
+  .nav a:first-child{
+    margin-top: 20px;
+  }

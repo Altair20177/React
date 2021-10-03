@@ -1,0 +1,37 @@
+.about-me{
+  display: flex;
+}
+.avatar{
+  background-image: url('https://s5.cdn.teleprogramma.pro/wp-content/uploads/2020/01/a76ebd11ecf1ab90a360b056f49b90a0.jpg');
+  width: 200px;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.content{
+  grid-area: c; 
+}
+.content img{
+  height: 300px;
+  width: 100%;
+}
+
+.posts{
+  margin-bottom: 50px;
+  margin-left: 30px;
+}
+.old__posts{
+  display: flex;
+  margin-bottom: 10px;
+  background-color: rgb(241, 241, 241);
+  border-radius: 50px;
+}
+.old__posts img{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+.dislike{
+  margin-left: 20px;
+}
