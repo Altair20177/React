@@ -1,0 +1,50 @@
+.wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.line{
+    height: 90vh;
+    width: 1.5px;
+    background-color: rgb(129, 129, 129);
+}
+
+
+
+.interlocutors{
+    font-size: 30px;
+    color: rgb(129, 129, 129);
+    letter-spacing: 2px;
+}
+.name{
+    text-decoration: none;
+    display: block;
+    color: rgb(65, 147, 255);
+    font-size: 20px;
+    background-color: rgb(202, 202, 202);
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: linear 0.15s;
+}
+.name:hover{
+    margin-left: 5px;
+}
+.active{
+    background-color: rgb(241, 241, 241);
+    border: 1px solid rgb(202, 202, 202);
+}
+.contacts{
+    margin-bottom: 15px;
+    width: 200px;
+}
+
+
+
+.messages{
+
+}
+.contacts{
+
+}

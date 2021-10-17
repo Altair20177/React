@@ -1,4 +1,4 @@
-import c from "../../../styles/Main.module.css";
+import c from "../../../styles/MyPost.module.css";
 
 function Post(props) {
     return (

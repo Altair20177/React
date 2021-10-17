@@ -2,7 +2,7 @@
     grid-area: h;
     background-color: white;
     position: sticky;
-    top: 0;
+    top: 8px;
     z-index: 2;
   }
   .header img{
