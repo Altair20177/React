@@ -2,14 +2,16 @@ const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SHOW_MORE = "SHOW-MORE";
 const SET_USERS = "SET-USERS";
+const SET_CURRENT_PAGE = "SET-CURRENT-PAGE";
+const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
+const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING";
 
 let initialState = {
-    users: [
-        { id: 1, userAvat: "https://trashbox.ru/ifiles/220798_004e6a_img_20140503_122504.jpg_min1/avatarki.-1.jpg", followed: false, fullName: "Timoshenko I.", status: "Born at 0 years", country: "Belarus", city: "Korma" },
-        { id: 2, userAvat: "https://trashbox.ru/ifiles/220798_004e6a_img_20140503_122504.jpg_min1/avatarki.-1.jpg", followed: true, fullName: "Vladislav K.", status: "Perfect investor in future", country: "Belarus", city: "Rechitsa" },
-        { id: 3, userAvat: "https://trashbox.ru/ifiles/220798_004e6a_img_20140503_122504.jpg_min1/avatarki.-1.jpg", followed: false, fullName: "Alexey P.", status: "I am the best in all aspects!!", country: "Belarus", city: "Novopolotsk" },
-        { id: 4, userAvat: "https://trashbox.ru/ifiles/220798_004e6a_img_20140503_122504.jpg_min1/avatarki.-1.jpg", followed: false, fullName: "Sidorenko D.", status: "Man... Dude... Do you know who am I?!?", country: "Belarus", city: "Elsk" },
-    ]
+    users: [],
+    pageSize: 10,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: false,
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -35,15 +37,24 @@ const usersReducer = (state = initialState, action) => {
                 })
             }
         case SET_USERS:
-            return{...state, users: [...state.users, ...action.users]}
+            return{...state, users: action.users}
+        case SET_CURRENT_PAGE:
+            return{...state, currentPage: action.currentPage}
+        case SET_TOTAL_USERS_COUNT:
+            return{...state, totalUsersCount: action.totalUsersCount}
+        case TOGGLE_IS_FETCHING:
+            return{...state, isFetching: action.isFetching}
         default:
             return state;
     }
 }
 
-export const followAC = userID => ({ type: FOLLOW, userID });
-export const unfollowAC = userID => ({ type: UNFOLLOW, userID });
-export const setUsersAC = users => ({type: SET_USERS, users});
+export const follow = userID => ({ type: FOLLOW, userID });
+export const unfollow = userID => ({ type: UNFOLLOW, userID });
+export const setUsers = users => ({type: SET_USERS, users});
+export const setCurrentPage = currentPage => ({type: SET_CURRENT_PAGE, currentPage});
+export const setTotalUsersCount = totalUsersCount => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
+export const toggleIsFetching = isFetching => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const showMore = () => ({ type: SHOW_MORE })
 
 export default usersReducer;

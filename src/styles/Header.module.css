@@ -1,6 +1,7 @@
 .header{
     grid-area: h;
     background-color: white;
+    display: flex;
     position: sticky;
     top: 8px;
     z-index: 2;

@@ -1,5 +1,6 @@
 const ADD_POST = "ADD-POST";
 const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
+const SET_USER_PROFILE = "SET-USER-PROFILE";
 
 let initialState = {
     allPosts: [
@@ -8,6 +9,7 @@ let initialState = {
         {id: 3, likes: 7, text: "Why are you running, man?!", image: "https://krasivosti.pro/uploads/posts/2021-07/1625877530_26-krasivosti-pro-p-kot-v-adidase-koti-krasivo-foto-29.jpg" },
     ],
     postText: "",
+    profile: null,
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -34,6 +36,11 @@ const mainReducer = (state = initialState, action) => {
                 postText: action.newText,
             }
 
+        case SET_USER_PROFILE:
+            return{
+                ...state,
+                profile: action.profile,
+            }
         default:
             return state;
     }
@@ -41,5 +48,6 @@ const mainReducer = (state = initialState, action) => {
 
 export const addPostAction = () => ({type: ADD_POST});
 export const changePostTextAction = (updateText) => ({type: CHANGE_POST_TEXT, newText: updateText});
+export const setUserProfile = profile => ({type: SET_USER_PROFILE, profile})
 
 export default mainReducer;

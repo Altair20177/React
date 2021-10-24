@@ -10,5 +10,6 @@ let reducers = combineReducers({
 })
 
 let store = createStore(reducers);
+let obj = store.getState();
 
 export default store;
