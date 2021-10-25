@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router";
 import c from "../../styles/Messages.module.css";
 import Contact from "./Contact";
 import OnlyMessages from "./OnlyMessages";
@@ -17,6 +18,8 @@ const Messages = (props) => {
         let changeText = newMessLink.current.value;
         props.updateMessText(changeText);
     }
+
+    if(!props.isAuth) return <Redirect to="/login"/>
 
     return(
         <div className={c.wrapper}>

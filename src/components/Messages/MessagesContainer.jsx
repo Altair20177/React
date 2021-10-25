@@ -6,6 +6,7 @@ let stateToProps = (state) => {
     return {
         messagesPage: state.messagesPage,
         messageText: state.messagesPage.messageText,
+        isAuth: state.auth.isAuth,
     }
 }
 
