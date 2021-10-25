@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { authRedirect } from "../../HOC/authRedirect";
 import { changeMessTextAction, sendMessAction } from "../../redux/messagesReducer";
 import Messages from "../Messages/Messages"
 
@@ -6,7 +7,6 @@ let stateToProps = (state) => {
     return {
         messagesPage: state.messagesPage,
         messageText: state.messagesPage.messageText,
-        isAuth: state.auth.isAuth,
     }
 }
 
@@ -21,6 +21,8 @@ let dispatchToProps = (dispatch) => {
     }
 }
 
-const MessagesContainer = connect(stateToProps, dispatchToProps)(Messages)
+let AuthRedirectComponent = authRedirect(Messages);
+
+const MessagesContainer = connect(stateToProps, dispatchToProps)(AuthRedirectComponent)
 
 export default MessagesContainer;

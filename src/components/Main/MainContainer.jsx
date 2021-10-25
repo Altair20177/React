@@ -2,7 +2,8 @@ import Main from "./Main";
 import React from "react";
 import { connect } from "react-redux";
 import { setUserThunkCreator } from "../../redux/mainReducer";
-import { Redirect, withRouter } from "react-router";
+import { withRouter } from "react-router";
+import { authRedirect } from "../../HOC/authRedirect";
 
 class MainContainer extends React.Component {
     componentDidMount(){
@@ -13,7 +14,7 @@ class MainContainer extends React.Component {
     }
 
     render(){
-        if(!this.props.isAuth) return <Redirect to="/login"/>
+        //if(!this.props.isAuth) return <Redirect to="/login"/>
 
         return (
             <Main {...this.props} profile={this.props.profile}/>
@@ -21,11 +22,12 @@ class MainContainer extends React.Component {
     }
 }
 
-let URLContainer = withRouter(MainContainer);
+let AuthRedirectComponent = authRedirect(MainContainer);
+
+let URLContainer = withRouter(AuthRedirectComponent);
 
 let stateToProps = (state) => ({
     profile: state.mainPage.profile,
-    isAuth: state.auth.isAuth,
 });
 
 export default connect(stateToProps, {setUserThunkCreator})(URLContainer);
