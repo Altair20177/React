@@ -2,11 +2,9 @@ import c from "../../styles/Main.module.css";
 import Preloader from "../common/Preloader/Preloader";
 
 function AboutMe(props) {
-    debugger
     if(!props.profile){
         return <Preloader/>
     }
-    debugger
     return (
         <div className={c.description}>
             <div className={c.avatar}>

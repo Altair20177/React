@@ -12,7 +12,6 @@ function NewPost(props) {
     };
 
     let updatePostText = () => {
-        debugger;
         let updateText = addPostLink.current.value;
         props.changePostText(updateText);
     };

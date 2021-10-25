@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header/Header';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
@@ -9,12 +8,13 @@ import Sidebar from './components/Sidebar/Sidebar';
 import MessagesContainer from "./components/Messages/MessagesContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import MainContainer from "./components/Main/MainContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
-        <Header />
+        <HeaderContainer/>
         <Sidebar />
         <div className="content">
           <Route path="/messages" render={() => <MessagesContainer />} />

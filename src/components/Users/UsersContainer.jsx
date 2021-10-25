@@ -1,41 +1,42 @@
 import React from "react";
 import { connect } from "react-redux";
 import { follow, setUsers, unfollow, setCurrentPage, setTotalUsersCount, toggleIsFetching } from "../../redux/usersReducer";
-import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import { usersAPI } from "../../API/API";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
-            });
+
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+            this.props.toggleIsFetching(false);
+            this.props.setUsers(data.items);
+            this.props.setTotalUsersCount(data.totalCount);
+        });
     }
 
     onPageChanged = p => {
         this.props.setCurrentPage(p);
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(response.data.items);
-            });
+
+        usersAPI.getUsers(p, this.props.pageSize).then(data => {
+            this.props.toggleIsFetching(false);
+            this.props.setUsers(data.items);
+        });
     }
 
     render() {
         return <>
-        {this.props.isFetching ? <Preloader/> : null}
-        <Users totalUsersCount ={this.props.totalUsersCount}
-        pageSize = {this.props.pageSize}
-        currentPage = {this.props.currentPage}
-        onPageChanged = {this.onPageChanged}
-        unfollow = {this.props.unfollow}
-        follow = {this.props.follow}
-        users = {this.props.users}/>
+            {this.props.isFetching ? <Preloader /> : null}
+            
+            <Users totalUsersCount={this.props.totalUsersCount}
+                pageSize={this.props.pageSize}
+                currentPage={this.props.currentPage}
+                onPageChanged={this.onPageChanged}
+                unfollow={this.props.unfollow}
+                follow={this.props.follow}
+                users={this.props.users} />
         </>
     }
 }
@@ -47,7 +48,7 @@ class UsersContainer extends React.Component {
 };
  */
 
-let stateToProps = state =>{
+let stateToProps = state => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -56,30 +57,6 @@ let stateToProps = state =>{
         isFetching: state.usersPage.isFetching,
     }
 }
-
-/* let dispatchToProps = dispatch =>{
-    debugger
-    return{
-        follow: userID => {
-            dispatch(followAC(userID))
-        },
-        unfollow: userID => {
-            dispatch(unfollowAC(userID))
-        },
-        setUsers: users => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: currPage =>{
-            dispatch(setCurrentPageAC(currPage))
-        },
-        setTotalUsersCount: totalUsersCount =>{
-            dispatch(setTotalUsersCountAC(totalUsersCount))
-        },
-        toggleIsFetching: isFetching =>{
-            dispatch(toggleIsFetchingAC(isFetching))
-        },
-    }
-} */
 
 export default connect(stateToProps, {
     follow,
