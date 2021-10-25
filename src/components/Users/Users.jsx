@@ -37,46 +37,14 @@ let Users = props => {
                                 <div className="btn">
                                     {
                                         user.followed ?
-                                            <button onClick={() => {
+                                            <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
 
-/*                                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
-                                                    withCredentials: true,
-                                                    headers: {
-                                                        "API-KEY": "8d9ce362-21ea-49f4-9ecf-c6b8ce12e7c7",
-                                                    }
-                                                })
-                                                .then(response => {
-                                                    if(response.data.resultCode === 0){
-                                                        props.unfollow(user.id)
-                                                    }
-                                                }); */
-
-                                                usersAPI.unfollowUser(user.id).then(data => {
-                                                    if(data.resultCode === 0){
-                                                        props.unfollow(user.id)
-                                                    }
-                                                })
+                                                props.unfollowUserThunkCreator(user.id);
 
                                                 }}>Unfollow</button> :
-                                            <button onClick={() => {
-/*                                                 axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,{}, {
-                                                    withCredentials: true,
-                                                    headers: {
-                                                        "API-KEY": "8d9ce362-21ea-49f4-9ecf-c6b8ce12e7c7",
-                                                    }
-                                                })
-                                                .then(response => {
-                                                    if(response.data.resultCode === 0){
-                                                        props.follow(user.id);
-                                                    }
-                                                });
- */
+                                            <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
 
-                                                usersAPI.followUser(user.id).then(data => {
-                                                    if(data.resultCode === 0){
-                                                        props.follow(user.id)
-                                                    }
-                                                })
+                                                props.followUserThunkCreator(user.id);
                                             
                                             }}>Follow</button>
                                     }

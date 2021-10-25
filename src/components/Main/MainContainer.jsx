@@ -1,20 +1,15 @@
 import Main from "./Main";
 import React from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import { setUserProfile } from "../../redux/mainReducer";
+import { setUserProfile, setUserThunkCreator } from "../../redux/mainReducer";
 import { withRouter } from "react-router";
+import { authAPI, usersAPI } from "../../API/API";
 
 class MainContainer extends React.Component {
     componentDidMount(){
         let userID = this.props.match.params.userID;
-        if(!userID){
-            userID = 2;
-        }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
-        .then(response => {
-            this.props.setUserProfile(response.data);
-        });
+
+        this.props.setUserThunkCreator(userID);
     }
 
     render(){
@@ -30,4 +25,4 @@ let stateToProps = (state) => ({
     profile: state.mainPage.profile,
 });
 
-export default connect(stateToProps, {setUserProfile})(URLContainer);
+export default connect(stateToProps, {setUserProfile, setUserThunkCreator})(URLContainer);

@@ -1,3 +1,5 @@
+import { authAPI, usersAPI } from "../API/API";
+
 const ADD_POST = "ADD-POST";
 const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
@@ -49,5 +51,18 @@ const mainReducer = (state = initialState, action) => {
 export const addPostAction = () => ({type: ADD_POST});
 export const changePostTextAction = (updateText) => ({type: CHANGE_POST_TEXT, newText: updateText});
 export const setUserProfile = profile => ({type: SET_USER_PROFILE, profile})
+
+export const setUserThunkCreator = (userID) => {
+    return dispatch => {
+        if(!userID){
+            authAPI.authUser().then(response => {
+                usersAPI.setUser(response.data.id).then(data => dispatch(setUserProfile(data)));
+            });
+        } 
+        else {
+            usersAPI.setUser(userID).then(data => dispatch(setUserProfile(data)));
+        }
+    }
+}
 
 export default mainReducer;
