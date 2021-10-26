@@ -1,6 +1,7 @@
 import c from "../../styles/Main.module.css";
 import Preloader from "../common/Preloader/Preloader";
 import userPhoto from "../../assets/img/usersPhoto.jpg";
+import Status from "./Status";
 
 function AboutMe(props) {
     if(!props.profile){
@@ -12,6 +13,7 @@ function AboutMe(props) {
                 <img src={props.profile.photos.small ? props.profile.photos.small : userPhoto} alt="аватарка" />
             </div>
             <ul className={c.description__info}>
+                <Status/>
                 <li>{props.profile.fullName}</li>
                 <li>{props.profile.aboutMe}</li>
                 {props.profile.lookingForAJob ? <li>{props.profile.lookingForAJobDescription}</li> : <li>Работу не ищу</li>}

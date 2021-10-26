@@ -5,6 +5,7 @@ import { setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching,
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import { authRedirect } from "../../HOC/authRedirect";
+import { compose } from "redux";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -51,18 +52,13 @@ let stateToProps = state => {
     }
 }
 
-let AuthRedirectComponent = authRedirect(UsersContainer);
-
-export default connect(stateToProps, {
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    toggleIsFetching,
-
-    getUsersThunkCreator,
-    unfollowUserThunkCreator,
-    followUserThunkCreator,
-})(AuthRedirectComponent);
+export default compose(
+    connect(stateToProps, {
+        setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching,
+        getUsersThunkCreator, unfollowUserThunkCreator, followUserThunkCreator,
+    }),
+    authRedirect
+)(UsersContainer)
 
 /*         props.setUsers([
             { id: 1, userAvat: "https://trashbox.ru/ifiles/220798_004e6a_img_20140503_122504.jpg_min1/avatarki.-1.jpg", followed: false, fullName: "Timoshenko I.", status: "Born at 0 years", country: "Belarus", city: "Korma" },

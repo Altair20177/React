@@ -5,7 +5,7 @@ import NewPostContainer from "./AllPosts/NewPostContainer";
 function Main(props) {
     return (
         <main className={c.content}>
-            <div className={c.background}></div>
+            {/* <div className={c.background}></div> */}
             <AboutMe profile = {props.profile}/>
             <NewPostContainer/>
         </main>
