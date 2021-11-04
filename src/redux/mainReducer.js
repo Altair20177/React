@@ -1,8 +1,9 @@
-import { authAPI, usersAPI } from "../API/API";
+import { authAPI, profileAPI, usersAPI } from "../API/API";
 
 const ADD_POST = "ADD-POST";
 const CHANGE_POST_TEXT = "CHANGE-POST-TEXT";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
+const SET_USER_STATUS = "SET-USER-STATUS";
 
 let initialState = {
     allPosts: [
@@ -12,6 +13,7 @@ let initialState = {
     ],
     postText: "",
     profile: null,
+    status: "",
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -43,6 +45,11 @@ const mainReducer = (state = initialState, action) => {
                 ...state,
                 profile: action.profile,
             }
+        case SET_USER_STATUS:
+            return{
+                ...state,
+                status: action.status,
+            }
         default:
             return state;
     }
@@ -50,7 +57,8 @@ const mainReducer = (state = initialState, action) => {
 
 export const addPostAction = () => ({type: ADD_POST});
 export const changePostTextAction = (updateText) => ({type: CHANGE_POST_TEXT, newText: updateText});
-export const setUserProfile = profile => ({type: SET_USER_PROFILE, profile})
+export const setUserProfile = profile => ({type: SET_USER_PROFILE, profile});
+export const setUserStatus = status => ({type: SET_USER_STATUS, status});
 
 export const setUserThunkCreator = (userID) => {
     return dispatch => {
@@ -62,6 +70,30 @@ export const setUserThunkCreator = (userID) => {
         else {
             usersAPI.setUser(userID).then(data => dispatch(setUserProfile(data)));
         }
+    }
+}
+
+export const getUserStatusThunkCreator = (userID) => {
+    return dispatch => {
+        if(!userID){
+            authAPI.authUser().then(response => {
+                profileAPI.getStatus(response.data.id).then(data => {dispatch(setUserStatus(data))});
+            });
+        }
+        else {
+            profileAPI.getStatus(userID).then(data => {dispatch(setUserStatus(data))});
+        }
+    }
+}
+
+export const updateUserStatusThunkCreator = (status) => {
+    return dispatch => {
+        debugger
+        profileAPI.updateStatus(status).then(response => {
+            if(response.resultCode === 0){
+                dispatch(setUserStatus(status))
+            }
+        })
     }
 }
 

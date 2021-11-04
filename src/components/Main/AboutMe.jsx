@@ -7,13 +7,14 @@ function AboutMe(props) {
     if(!props.profile){
         return <Preloader/>
     }
+
     return (
         <div className={c.description}>
             <div className={c.avatar}>
                 <img src={props.profile.photos.small ? props.profile.photos.small : userPhoto} alt="аватарка" />
             </div>
             <ul className={c.description__info}>
-                <Status/>
+                <Status status={props.status} updateStatus={props.updateStatus}/>
                 <li>{props.profile.fullName}</li>
                 <li>{props.profile.aboutMe}</li>
                 {props.profile.lookingForAJob ? <li>{props.profile.lookingForAJobDescription}</li> : <li>Работу не ищу</li>}

@@ -6,7 +6,7 @@ function Main(props) {
     return (
         <main className={c.content}>
             {/* <div className={c.background}></div> */}
-            <AboutMe profile = {props.profile}/>
+            <AboutMe profile = {props.profile} status={props.status} updateStatus={props.updateStatus}/>
             <NewPostContainer/>
         </main>
     )
