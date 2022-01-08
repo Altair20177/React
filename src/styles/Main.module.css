@@ -16,6 +16,13 @@
   height: 300px;
   width: 100%;
 }
+#nickname{
+  margin-left: 10px;
+  font-weight: 600;
+}
+.description__info > li{
+  margin: 10px 0;
+}
 
 .description{
   display: flex;
@@ -30,4 +37,7 @@
 .description__info > li:first-child{
   margin-bottom: 20px;
   font-size: 24px;
+}
+.allContacts{
+  list-style: decimal;
 }

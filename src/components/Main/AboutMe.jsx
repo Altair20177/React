@@ -15,11 +15,11 @@ function AboutMe(props) {
             </div>
             <ul className={c.description__info}>
                 <Status status={props.status} updateStatus={props.updateStatus}/>
-                <li>{props.profile.fullName}</li>
+                <li id={c.nickname}>{props.profile.fullName}</li>
                 <li>{props.profile.aboutMe}</li>
                 {props.profile.lookingForAJob ? <li>{props.profile.lookingForAJobDescription}</li> : <li>Работу не ищу</li>}
                 <li>Контакты</li>
-                <ul>
+                <ul className={c.allContacts}>
                     <li>Facebook: {props.profile.contacts.facebook}</li>
                     <li>Instagram: {props.profile.contacts.instagram}</li>
                     <li>VK: {props.profile.contacts.vk}</li>

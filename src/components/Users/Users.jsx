@@ -14,33 +14,31 @@ let Users = props => {
 
     return (
         <div>
-            <div>
+            <div className={s.pagination}>
                 {pages.map(p => {
                     return <span key={p} className={props.currentPage === p ? s.active : s.nonactive}
                         onClick={() => { props.onPageChanged(p) }} >{p}</span>
                 })}
             </div>
 
-            <div className="title">Users</div>
-
-            <div>
+            <div className={s.allUsers}>
                 {
                     props.users.map(user =>
-                        <div key={user.id}>
+                        <div key={user.id} className={s.userProfile}>
                             <div className="avat-btn">
                                 <NavLink to={"/profile/" + user.id}>
 
-                                    <img src={user.photos.small ? user.photos.small : userPhoto} className="avat"></img>
+                                    <img src={user.photos.small ? user.photos.small : userPhoto} className={s.avat}></img>
                                 </NavLink>
-                                <div className="btn">
+                                <div>
                                     {
                                         user.followed ?
-                                            <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                                            <button className={s.btn} disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
 
                                                 props.unfollowUserThunkCreator(user.id);
 
                                                 }}>Unfollow</button> :
-                                            <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                                            <button className={s.btn} disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
 
                                                 props.followUserThunkCreator(user.id);
                                             
@@ -48,14 +46,14 @@ let Users = props => {
                                     }
                                 </div>
                             </div>
-                            <div className="content">
-                                <div className="fullName-status">
-                                    <div className="fullName">{user.name}</div>
-                                    <div className="status">{user.status}</div>
+                            <div className={s.content}>
+                                <div className={s.nameStatus}>
+                                    <div className={s.fullName}>{user.name}</div>
+                                    <div className={user.status ? s.statusYes : s.statusNo}>{user.status}</div>
                                 </div>
-                                <div className="country-city">
-                                    <div className="country">{user.country}</div>
-                                    <div className="city">{user.city}</div>
+                                <div className={s.countryCity}>
+                                    <div className={s.country}>{user.country}</div>
+                                    <div className={s.city}>{user.city}</div>
                                 </div>
                             </div>
                         </div>
